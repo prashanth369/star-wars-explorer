@@ -36,7 +36,7 @@ export default function PeopleList(props: ToggleBackground) {
   };
 
   return (
-    <>
+    <div className="persons-list">
       {people && people.list
         ? people.list.map(p => (
               <div
@@ -50,6 +50,6 @@ export default function PeopleList(props: ToggleBackground) {
               </div>
           ))
         : null}
-    </>
+    </div>
   );
 }

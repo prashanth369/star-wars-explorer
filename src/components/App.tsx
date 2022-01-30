@@ -23,14 +23,14 @@ function App() {
   return (
     <>
       <div>
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" >
           <div className="dashboard-header">
             <div className="menu">
               <DehazeIcon />
             </div>
             <div className="title">{title}</div>
           </div>
-          <Box sx={{ bgcolor: bodyBackgroundColor, height: "90vh" }}>
+          <Box sx={{ height: "100vh", bgcolor: bodyBackgroundColor }} className="container">
             <Router>
               <Switch>
                 <Route exact path="/" component={Dashboard}></Route>

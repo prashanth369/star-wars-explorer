@@ -1,3 +1,6 @@
+.container{
+    overflow: scroll
+}
 .dashboard-header {
     background-color: #145bf5;
     color: #ffff;
@@ -32,9 +35,19 @@
         }
     }
 }
+.persons-list{
+    margin:0px 10px 10px 10px;
+    background-color:#ffff;
+    padding:20px 0px;
+}
 .person-list {
     display:flex;
-    margin-bottom:15px;
+    margin:20px;
+    cursor: pointer;
+    &:hover {
+        background-color: #f2f2f2; 
+    }
+ 
 
     .person-name {
         padding-top:15px;
@@ -48,4 +61,28 @@
         display:block;
         margin-right:20px;
     }
+}
+.personContainer{
+    margin:10px;
+    background-color: #ffff;
+    padding:20px;
+    .title {
+        font-size:20px;
+        font-weight:600;
+    }
+    .person-info{
+        color: #6e6d6b;
+        font-size:14px;
+        margin-top:20px;
+        font-weight:500;
+        label {
+            padding-bottom:18px;
+        }
+        .item {
+            border-bottom: 1px #6e6d6b dotted;
+            padding: 18px 0px;
+            margin-bottom:18px;
+        }
+    }
+  
 }

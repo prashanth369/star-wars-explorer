@@ -33,18 +33,26 @@ export default function People() {
   useEffect(() => {
     personObject();
   }, []);
-  
+
   return (
-    <div>
+    <div className="personContainer">
       {person ? (
         <>
-          <div> {person.name}</div>
-          <div> {person.height}</div>
-          <div> {person.mass}</div>
-          <div> {person.hair_color}</div>
-          <div> {person.skin_color}</div>
-          <div> {person.gender}</div>
-          <div> {person.birth_year}</div>
+          <div className="title"> {person.name}</div>
+          <div className="person-info">
+            <label> Height </label>
+            <div className="item"> {person.height}</div>
+            <label> Mass </label>
+            <div className="item"> {person.mass}</div>
+            <label> Hair Color </label>
+            <div className="item"> {person.hair_color}</div>
+            <label> Skin Color </label>
+            <div className="item"> {person.skin_color}</div>
+            <label> Gender </label>
+            <div className="item"> {person.gender}</div>
+            <label> Birth Year </label>
+            <div className="item"> {person.birth_year}</div>
+          </div>
         </>
       ) : (
         <div>...Loading</div>
