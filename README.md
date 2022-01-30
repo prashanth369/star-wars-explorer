@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+# Running this React Application locally
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Please follow all the below steps and prerequisites for running this application locally
+
+## Prerequisites
+ . Please make sure that you have NodeJs installed on your device and ideally have a version which is >=12
+ . Please install npm which comes along with the Node and make sure that a compatible version of npm is installed
+ . Install all the dependencies using `npm install` or `yarn install`
+ . Run the project with `npm start`, this command runs the app in the development mode, you can open `http://localhost:3000` in your local machine to check the app
+ . finally navigate to different buttons and play with it!
+
+
 
 ## Available Scripts
 

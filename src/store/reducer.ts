@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import { ActionTypeProps } from '../types';
 
-const initialState = { title: "Star War Explorer" };
+const initialState = { title: "Star Wars Explorer" };
 
 const reducer = (state = initialState, action: ActionTypeProps) => {
   switch (action.type) {
@@ -12,4 +12,4 @@ const reducer = (state = initialState, action: ActionTypeProps) => {
   }
 };
 
-export default reducer; 
+export default reducer;

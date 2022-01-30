@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import {LoadingButton} from '@mui/lab';
+
 import { MovieProps } from "../types";
 import Requester from "./Requester";
+import store from '../store';
+import { ButtonTypes } from '../constants';
+import { buttonSelected } from '../store/actionCreators'
 
 interface paramProps {
   id?: string;
@@ -9,6 +14,7 @@ interface paramProps {
 export default function People() {
   const [movie, setMovie] = useState<MovieProps>();
   const { id }: paramProps = useParams();
+  let isMounted = false;
 
   const movieObject = async () => {
     const movieFetched = await Requester({
@@ -21,13 +27,21 @@ export default function People() {
         title: movieFetched.title,
         director: movieFetched.director,
         producer: movieFetched.producer,
+        release_date: movieFetched.release_date
       };
-      setMovie(movieFormatObject);
+    
+      if(isMounted)
+        setMovie(movieFormatObject);
     }
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.MOVIES));
+
+    isMounted = true;
     movieObject();
+
+    return () => { isMounted = false; }
   });
 
   return (
@@ -40,10 +54,12 @@ export default function People() {
             <div className="item"> {movie.director}</div>
             <label> Producer </label>
             <div className="item"> {movie.producer}</div>
+            <label> Release date </label>
+            <div className="item"> {movie.release_date}</div>
           </div>
         </>
       ) : (
-        <div>...Loading</div>
+        <div><LoadingButton loading={true}/> ... Loading </div>
       )}
     </div>
   );

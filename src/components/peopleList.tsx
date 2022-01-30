@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
+import {LoadingButton} from '@mui/lab';
+import { ButtonTypes } from '../constants';
 import { PeopleListResultProps, PeopleProps } from "../types";
 import Requester from "./Requester";
+import store from '../store';
+import { buttonSelected } from '../store/actionCreators';
 
-interface ToggleBackground {
-  clickHandler: () => void;
-}
-
-export default function PeopleList(props: ToggleBackground) {
+export default function PeopleList() {
   const [people, setPeople] = useState<PeopleListResultProps>();
-  props.clickHandler();
   const history = useHistory();
+  let isMounted = false;
 
   const peopleArray = async () => {
     const peopleFetched = await Requester({
@@ -24,11 +24,17 @@ export default function PeopleList(props: ToggleBackground) {
           name: p.name,
           id: index + 1
         }));
-    setPeople({ list: peopleFormatArray });
+
+    if(isMounted)
+      setPeople({ list: peopleFormatArray });
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.PEOPLE));
+    isMounted = true;
     peopleArray();
+
+    return () => { isMounted = false }
   }, []);
 
   const handlePersonSelection = (id?: Number) => {
@@ -51,7 +57,7 @@ export default function PeopleList(props: ToggleBackground) {
                 <div className="person-name">{p.name} </div>
               </div>
             ))
-          : null}
+          : <div><LoadingButton loading={true}/> ... Loading </div>}
       </div>
     </div>
   );

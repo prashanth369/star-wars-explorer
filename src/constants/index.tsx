@@ -1,6 +1,6 @@
 export  const  ButtonTypes = {
-    PEOPLE: 'PEOPLE',
-    MOVIES: 'MOVIES',
-    PLANETS: 'PLANETS',
+    PEOPLE: 'People',
+    MOVIES: 'Movies',
+    PLANETS: 'Planets',
     DEFAULT: 'Star Wars Explorer'
 }

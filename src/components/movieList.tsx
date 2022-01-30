@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import MovieIcon from '@mui/icons-material/Movie';
+import {LoadingButton} from '@mui/lab';
+
 import { MovieListResultProps, MovieProps } from "../types";
+import { ButtonTypes } from '../constants';
 import Requester from "./Requester";
+import store from '../store';
+import { buttonSelected } from '../store/actionCreators';
 
-interface ToggleBackground {
-  clickHandler: () => void;
-}
-
-export default function MovieList(props: ToggleBackground) {
+export default function MovieList() {
   const [movies, setMovies] = useState<MovieListResultProps>();
-  props.clickHandler();
   const history = useHistory();
+  let isMounted = false;
 
   const moviesArray = async () => {
     const moviesFetched = await Requester({
@@ -24,12 +25,17 @@ export default function MovieList(props: ToggleBackground) {
           title: p.title,
           id: index + 1
         }));
-        setMovies({ list: movieFormatArray });
+    if(isMounted)
+      setMovies({ list: movieFormatArray });
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.MOVIES));
+    isMounted = true;
     moviesArray();
-  }, []);
+
+    return () => { isMounted = false; }
+  });
 
   const handleMovieSelection = (id?: Number) => {
     history.push(`/movies/${id}`);
@@ -51,7 +57,7 @@ export default function MovieList(props: ToggleBackground) {
                 <div className="person-name">{p.title} </div>
               </div>
             ))
-          : null}
+          : <div><LoadingButton loading={true}/> ... Loading </div>}
       </div>
     </div>
   );

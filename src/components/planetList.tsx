@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { LoadingButton } from '@mui/lab';
 import { PlanetListResultProps, PlanetProps } from "../types";
+import { ButtonTypes } from '../constants';
 import Requester from "./Requester";
+import store from '../store';
+import { buttonSelected } from '../store/actionCreators';
 import planetImg from '../images/planets.png';
-interface ToggleBackground {
-  clickHandler: () => void;
-}
 
-export default function PlanetList(props: ToggleBackground) {
+export default function PlanetList() {
   const [planets, setPlanets] = useState<PlanetListResultProps>();
-  props.clickHandler();
   const history = useHistory();
+  let isMounted = false;
 
   const peopleArray = async () => {
     const planetsFetched = await Requester({
@@ -23,11 +24,16 @@ export default function PlanetList(props: ToggleBackground) {
           name: p.name,
           id: index + 1
         }));
-        setPlanets({ list: planetsFormatArray });
+
+    if(isMounted)
+      setPlanets({ list: planetsFormatArray });
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.PLANETS));
+    isMounted = true;
     peopleArray();
+    return () => {isMounted = false};
   }, []);
 
   const handlePlanetSelection = (id?: Number) => {
@@ -51,7 +57,7 @@ export default function PlanetList(props: ToggleBackground) {
                 <div className="person-name">{p.name} </div>
               </div>
             ))
-          : null}
+          : <div><LoadingButton loading={true}/> ... Loading </div>}
       </div>
     </div>
   );

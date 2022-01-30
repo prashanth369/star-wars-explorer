@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { LoadingButton } from '@mui/lab';
 import { PeopleProps } from "../types";
 import Requester from "./Requester";
+import store from '../store';
+import { ButtonTypes } from '../constants';
+import { buttonSelected } from '../store/actionCreators';
 
 interface paramProps {
   id?: string;
@@ -9,6 +13,7 @@ interface paramProps {
 export default function People() {
   const [person, setPerson] = useState<PeopleProps>();
   const { id }: paramProps = useParams();
+  let isMounted = false;
 
   const personObject = async () => {
     const personFetched = await Requester({
@@ -26,12 +31,18 @@ export default function People() {
         gender: personFetched.gender,
         birth_year: personFetched.birth_year
       };
-      setPerson(peopleFormatObject);
+
+      if(isMounted)
+        setPerson(peopleFormatObject);
     }
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.PEOPLE));
+    isMounted = true;
     personObject();
+
+    return () => { isMounted = false; }
   });
 
   return (
@@ -55,7 +66,7 @@ export default function People() {
           </div>
         </>
       ) : (
-        <div>...Loading</div>
+        <div><LoadingButton loading={true}/> ... Loading </div>
       )}
     </div>
   );

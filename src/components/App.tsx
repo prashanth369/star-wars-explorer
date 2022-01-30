@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import { Container, Box } from "@mui/material";
 
@@ -18,8 +18,6 @@ function App() {
   const { title } = store.getState();
   const [mainTitle, setMainTitle] = useState<string>(title);
 
-  const handleSubSelection = () => {};
-
   const unsubscribe = store.subscribe(() => {
     const newTitle = store.getState().title;
     setMainTitle(newTitle);
@@ -32,9 +30,11 @@ function App() {
       <div className="app">
         <Container maxWidth="sm">
           <div className="dashboard-header">
-            <div className="menu">
-              <DehazeIcon />
-            </div>
+            <a href="/">
+              <div className="menu">
+                <DehazeIcon />
+              </div>
+            </a>
             <div className="title">{mainTitle}</div>
           </div>
           <Box
@@ -44,27 +44,9 @@ function App() {
             <Router>
               <Switch>
                 <Route exact path="/" component={Dashboard}></Route>
-                <Route
-                  exact
-                  path="/people"
-                  component={() => (
-                    <PeopleList clickHandler={handleSubSelection} />
-                  )}
-                ></Route>
-                <Route
-                  exact
-                  path="/planets"
-                  component={() => (
-                    <PlanetList clickHandler={handleSubSelection} />
-                  )}
-                ></Route>
-                <Route
-                  exact
-                  path="/movies"
-                  component={() => (
-                    <MovieList clickHandler={handleSubSelection} />
-                  )}
-                ></Route>
+                <Route exact path="/people" component={PeopleList}></Route>
+                <Route exact path="/planets" component={PlanetList}></Route>
+                <Route exact path="/movies" component={MovieList}></Route>
                 <Route path={`/people/:id`} component={People}></Route>
                 <Route path={`/planets/:id`} component={Planet}></Route>
                 <Route path={`/movies/:id`} component={Movie}></Route>

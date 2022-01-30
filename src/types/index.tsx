@@ -21,6 +21,7 @@ export interface PeopleProps {
       title?: string;
       director?: string;
       producer?: string;
+      release_date?: string;
   }
   
   export interface PeopleResultProp {

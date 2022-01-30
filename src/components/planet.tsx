@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { LoadingButton } from '@mui/lab';
 import { PlanetProps } from "../types";
 import Requester from "./Requester";
+import { ButtonTypes } from '../constants';
+
+import store from '../store';
+import { buttonSelected } from '../store/actionCreators';
 
 interface paramProps {
   id?: string;
@@ -9,6 +14,7 @@ interface paramProps {
 export default function Planet() {
   const [planet, setPlanet] = useState<PlanetProps>();
   const { id }: paramProps = useParams();
+  let isMounted = false;
 
   const planetObject = async () => {
     const planetFetched = await Requester({
@@ -22,12 +28,18 @@ export default function Planet() {
         terrain: planetFetched.terrain,
         population: planetFetched.population
       };
-      setPlanet(planetFormatObject);
+
+      if(isMounted)
+        setPlanet(planetFormatObject);
     }
   };
 
   useEffect(() => {
+    store.dispatch(buttonSelected(ButtonTypes.PLANETS));
+    isMounted = true;
     planetObject();
+
+    return () => { isMounted = false}
   });
 
   return (
@@ -43,7 +55,7 @@ export default function Planet() {
           </div>
         </>
       ) : (
-        <div>...Loading</div>
+        <div><LoadingButton loading={true}/> ... Loading </div>
       )}
     </div>
   );
