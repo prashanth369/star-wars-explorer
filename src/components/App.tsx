@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="app">
         <Container maxWidth="sm" >
           <div className="dashboard-header">
             <div className="menu">
@@ -30,7 +30,7 @@ function App() {
             </div>
             <div className="title">{title}</div>
           </div>
-          <Box sx={{ height: "100vh", bgcolor: bodyBackgroundColor }} className="container">
+          <Box sx={{ height: "80vh", bgcolor: bodyBackgroundColor }} className="container">
             <Router>
               <Switch>
                 <Route exact path="/" component={Dashboard}></Route>

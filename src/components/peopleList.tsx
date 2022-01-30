@@ -36,11 +36,13 @@ export default function PeopleList(props: ToggleBackground) {
   };
 
   return (
-    <div className="persons-list">
-      {people && people.list
-        ? people.list.map(p => (
+    <div className="person-container">
+      <div className="persons-list">
+        {people && people.list
+          ? people.list.map(p => (
               <div
-                className="person-list" key={p.id}
+                className="person-list"
+                key={p.id}
                 onClick={() => handlePersonSelection(p.id)}
               >
                 <div className="avatar">
@@ -48,8 +50,9 @@ export default function PeopleList(props: ToggleBackground) {
                 </div>
                 <div className="person-name">{p.name} </div>
               </div>
-          ))
-        : null}
+            ))
+          : null}
+      </div>
     </div>
   );
 }
