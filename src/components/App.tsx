@@ -6,7 +6,11 @@ import { Container, Box } from "@mui/material";
 
 import Dashboard from "./Dashboard";
 import PeopleList from "./peopleList";
+import PlanetList from './planetList';
+import MovieList from './movieList';
 import People from "./people";
+import Movie from './movie';
+import Planet from './planet';
 import "../styles/main.scss";
 
 
@@ -41,7 +45,23 @@ function App() {
                     <PeopleList clickHandler={handleSubSelection} />
                   )}
                 ></Route>
+                     <Route
+                  exact
+                  path="/planets"
+                  component={() => (
+                    <PlanetList clickHandler={handleSubSelection} />
+                  )}
+                ></Route>
+                       <Route
+                  exact
+                  path="/movies"
+                  component={() => (
+                    <MovieList clickHandler={handleSubSelection} />
+                  )}
+                ></Route>
                 <Route path={`/people/:id`} component={People}></Route>
+                <Route path={`/planets/:id`} component={Planet}></Route>
+                <Route path={`/movies/:id`} component={Movie}></Route>
               </Switch>
             </Router>
           </Box>
