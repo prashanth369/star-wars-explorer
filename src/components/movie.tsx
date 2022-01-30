@@ -28,7 +28,7 @@ export default function People() {
 
   useEffect(() => {
     movieObject();
-  }, []);
+  });
 
   return (
     <div className="personContainer">

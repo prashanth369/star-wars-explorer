@@ -20,7 +20,7 @@ export default function Planet() {
         id,
         name: planetFetched.name,
         terrain: planetFetched.terrain,
-        population: planetFetched.population,
+        population: planetFetched.population
       };
       setPlanet(planetFormatObject);
     }
@@ -28,7 +28,7 @@ export default function Planet() {
 
   useEffect(() => {
     planetObject();
-  }, []);
+  });
 
   return (
     <div className="personContainer">

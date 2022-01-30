@@ -60,3 +60,15 @@ export interface PeopleProps {
       id?: number;
       title?: string;
   }
+
+//Reducer types
+
+export interface ActionTypeProps {
+  type: string;
+  payload: ReducerPayload;
+
+}
+
+export interface ReducerPayload {
+  title: string;
+} 

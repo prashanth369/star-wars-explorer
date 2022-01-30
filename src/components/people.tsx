@@ -32,7 +32,7 @@ export default function People() {
 
   useEffect(() => {
     personObject();
-  }, []);
+  });
 
   return (
     <div className="personContainer">

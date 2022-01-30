@@ -45,7 +45,7 @@ export default function PlanetList(props: ToggleBackground) {
                 onClick={() => handlePlanetSelection(p.id)}
               >
                 <div className="avatar">
-                    <img src={planetImg}></img>
+                    <img src={planetImg} alt="Planets Icon"></img>
                   {/* <PersonIcon sx={{ fontSize: 40, color: "#94908f" }} /> */}
                 </div>
                 <div className="person-name">{p.name} </div>
