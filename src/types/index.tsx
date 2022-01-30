@@ -1,4 +1,5 @@
 export interface PeopleProps  {
+    id?: string;
     name?: string;
     height?: string;
     mass?: string;
@@ -9,16 +10,17 @@ export interface PeopleProps  {
 };
 
 export interface PeopleResultProp {
-    person?: PeopleProps[]
+    person?: PeopleProps[];
 }
 
 export interface PeopleListResultProps {
-    people?: PeopleListProps[]
+    list?: PeopleListProps[];
 }
 export interface RequesterProps {
-    url: string
+    url: string;
 }
 
 export interface PeopleListProps {
     name?: string;
+    id?: number;
   }

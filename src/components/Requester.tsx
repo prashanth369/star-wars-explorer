@@ -1,12 +1,10 @@
-import React from 'react';
 import axios from 'axios';
-import {RequesterProps} from '../types'
+import { RequesterProps } from '../types';
 
 const Requester = async (props: RequesterProps) =>  {
-    const {data} = await axios.get(props.url)
-    console.log(data)
-    return data.results
+    const {data} = await axios.get(props.url);
+    return data;
 
 } 
 
-export default Requester
+export default Requester;
